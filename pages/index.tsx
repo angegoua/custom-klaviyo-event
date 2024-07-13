@@ -111,7 +111,7 @@ const ShoppingCart = () => {
             Add to Bag
           </Button>
           <p className="mt-4">Handmade in Paris</p>
-          <p>Model is 5'6 wearing an XS</p>
+          <p>Model is 5&apos;6 wearing an XS</p>
           <p>Worldwide shipping</p>
           <p>Size not listed ? Contact us for a custom order</p>
         </div>
