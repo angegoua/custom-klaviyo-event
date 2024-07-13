@@ -78,6 +78,8 @@ export default async function handler(
         return;
       }
 
+      res.status(200).json({ message: 'Event sent to Klaviyo API' });
+
     
     } catch (err) {
       console.error('Fetch error:', err);

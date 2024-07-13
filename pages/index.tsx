@@ -21,22 +21,40 @@ const ShoppingCart = () => {
   const [price] = useState(249);
   const [email, setEmail] = useState("");
 
+  const isValidEmail = () => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const toggleCart = () => setIsCartOpen(!isCartOpen);
 
   const { toast } = useToast()
 
-  const sendKlaviyoABCartEvent = () => {
+  const sendKlaviyoABCartEvent = async () => {
     fetch("/api/create-klaviyo-event", {
       method: "POST",
       body: JSON.stringify({price, email, size}),
     });
 
+    
+    const response = await fetch("/api/create-klaviyo-event", {
+      method: "POST",
+      body: JSON.stringify({price, email, size}),
+    });
 
+    if (response.ok) {
       toast({
         variant: "success",
         title: "Abandoned Cart Flow has been triggered",
         description: "Check your mail, you must receive an abandoned cart template mail in 5mins.",
       })
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Please try again later.",
+      })
+    }
+
   };
 
   return (
@@ -116,13 +134,6 @@ const ShoppingCart = () => {
                       onChange={(e) => setQuantity(Number(e.target.value))}
                       className="w-16"
                     />
-                    <Button variant="outline" size="icon">
-                      <img
-                        src="/api/placeholder/16/16"
-                        alt="Delete"
-                        className="w-4 h-4"
-                      />
-                    </Button>
                   </div>
                 </div>
               </div>
@@ -138,7 +149,7 @@ const ShoppingCart = () => {
                 placeholder="Enter your email"
               />
               <Button
-                disabled={!email}
+                disabled={!isValidEmail()}
                 onClick={sendKlaviyoABCartEvent}
                 className="w-full mt-3"
               >
