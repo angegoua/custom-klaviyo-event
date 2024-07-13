@@ -12,7 +12,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
 
-  const {email, size, price} = JSON.parse(req.body)
+  const {email, size, product} = JSON.parse(req.body)
 
   const options = {
     method: 'POST',
@@ -28,7 +28,7 @@ export default async function handler(
         attributes: {
           properties: { abCartKey: 'ch-started' },
           time: new Date().toISOString(),
-          value: price,
+          value: product.price,
           value_currency: 'EUR',
           metric: { data: { type: 'metric', attributes: { name: 'Custom Checkout Started' } } },
           profile: {
@@ -49,7 +49,7 @@ export default async function handler(
                   region: 'NY',
                   zip: '10017',
                 },
-                properties: {size},
+                properties: {size, ...product },
                 meta: {
                   patch_properties: {
                     append: { newKey: 'New Value' },
@@ -57,7 +57,7 @@ export default async function handler(
                     unset: 'skus'
                   }
                 },
-                email
+                email,
               }
             }
           }

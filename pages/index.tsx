@@ -29,6 +29,12 @@ const ShoppingCart = () => {
 
   const { toast } = useToast()
 
+  const product = {
+    name: "Leopard Print Mermaid Dress",
+    price: 249,
+    imageUrl: "https://cdn.prod.website-files.com/6650785c948382ff94f56977/665891c1b6d73d627f820928_1.jpg",
+  };
+
   const sendKlaviyoABCartEvent = async () => {
     fetch("/api/create-klaviyo-event", {
       method: "POST",
@@ -38,7 +44,7 @@ const ShoppingCart = () => {
     
     const response = await fetch("/api/create-klaviyo-event", {
       method: "POST",
-      body: JSON.stringify({price, email, size}),
+      body: JSON.stringify({email, size, product}),
     });
 
     if (response.ok) {
@@ -56,6 +62,9 @@ const ShoppingCart = () => {
     }
 
   };
+
+  
+  
 
   return (
     <div className="container mx-auto p-4">
@@ -77,9 +86,9 @@ const ShoppingCart = () => {
         </div>
         <div className="md:w-1/2">
           <h2 className="text-3xl font-bold mb-4">
-            Leopard Print Mermaid Dress
+            {product.name}
           </h2>
-          <p className="text-xl mb-4">€ 249.00 EUR</p>
+          <p className="text-xl mb-4">€ {product.price} EUR</p>
           <p className="mb-2">Tax included.</p>
           <div className="mb-4">
             <p className="mb-2">Size</p>
