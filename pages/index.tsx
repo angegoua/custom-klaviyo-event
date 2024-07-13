@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input";
+import Image from 'next/image'
 
 import {
   Card,
@@ -78,7 +79,9 @@ const ShoppingCart = () => {
 
       <div className="flex flex-col md:flex-row gap-8">
         <div className="md:w-1/2">
-          <img
+          <Image
+            width={400}
+            height={600}
             src="https://cdn.prod.website-files.com/6650785c948382ff94f56977/665891c1b6d73d627f820928_1.jpg"
             alt="Leopard Print Mermaid Dress"
             className="w-full"
@@ -127,7 +130,9 @@ const ShoppingCart = () => {
             </CardHeader>
             <CardContent>
               <div className="flex gap-4 mb-4">
-                <img
+                <Image
+                  width={400}
+                  height={600}
                   src="https://cdn.prod.website-files.com/6650785c948382ff94f56977/665891c1b6d73d627f820928_1.jpg"
                   alt="Leopard Print Mermaid Dress"
                   className="w-24"
